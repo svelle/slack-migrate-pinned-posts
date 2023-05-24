@@ -60,12 +60,16 @@ def getPostTimestamps(channelType):
     for channel in channelData:
         if "pins" in channel:
             for pinnedPost in channel["pins"]:
-                postIds.append(pinnedPost["id"])
+                if pinnedPost["type"] == "C":
+                    postIds.append(pinnedPost["id"])
+                else:
+                    continue
     return postIds
 
 
 def truncTimestamps(postIds):
     for i in range(0, len(postIds)):
+        print(postIds[i])
         postIds[i] = str(int(postIds[i].split('.')[0]) * 1000)
     return postIds
 
